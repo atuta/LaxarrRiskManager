@@ -8,9 +8,8 @@ to three take-profit levels.
 
 ![Laxarr Risk Manager panel placing a USDJPY sell limit order with SL and three TP levels drawn on the chart](docs/images/panel-screenshot.png)
 
-**Platform:** Windows only. MetaTrader 5's MQL5 runtime and MetaEditor are
-Windows-native, so this EA requires a Windows installation of the
-terminal (a Windows VM/VPS works for Mac or Linux users).
+**Platform:** Tested on both Windows and macOS. On macOS it runs in the
+official MetaTrader 5 for Mac terminal, the same way as on Windows.
 
 **Trade execution:** Manual only. Every order requires the trader to
 click Execute and confirm a popup — nothing is submitted on the trader's
@@ -20,6 +19,27 @@ positions the moment the limit is breached, and prop-challenge protection
 (`ChallengeAutoClose`, on by default) closes them once
 `ChallengeAutoCloseAtPercent` of a challenge loss limit is used — both
 independent of any click, since protecting the account is the point.
+
+## Configuring risk settings and guardrails
+
+Position sizing and account guardrails are **not set inside the EA**. Each
+trader configures them in their own backoffice on the trading journal web
+app. The EA fetches them when it syncs, for example when you click
+**Sync Risk/Trades** on the panel, and enforces them locally from then on.
+
+![Journal backoffice risk settings: position sizing, account guardrails, and post-trade advice targets](docs/images/backoffice-guardrails.png)
+
+The backoffice settings are grouped into three cards:
+
+- **Position Sizing**: risk per trade (max 2%), or a fixed lot size instead
+  of risk-based sizing.
+- **Account Guardrails**: max risk per trade (max 2%), max daily loss
+  (max 3%), and max open positions. Enter 0 for no cap.
+- **Post-Trade Advice Targets**: target minimum risk:reward, and a cooldown
+  after a set number of losses in a row. Enter 0 to turn either off.
+
+To change any of these limits, update them in the backoffice and sync the
+EA again.
 
 ## File overview
 
@@ -135,7 +155,8 @@ the background.
   fixed-lot mode.
 - **Account guardrails** — maximum daily loss (auto-closes all open
   positions if breached), maximum open positions, consecutive-loss
-  cooldown, and minimum risk:reward enforcement.
+  cooldown, and minimum risk:reward enforcement, all configured in the
+  journal backoffice.
 - **Prop-firm challenge protection** — live daily/maximum loss headroom
   from the web app's challenge rules, trade blocking, and optional
   auto-close before a limit is hit.
