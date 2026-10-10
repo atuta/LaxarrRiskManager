@@ -6,6 +6,8 @@ live SL/TP/Entry chart visualization, rather than an autonomous trading
 bot. It supports Market, Limit, Stop, and Stop Limit orders, each with up
 to three take-profit levels.
 
+![Laxarr Risk Manager panel placing a USDJPY sell limit order with SL and three TP levels drawn on the chart](docs/images/panel-screenshot.png)
+
 **Platform:** Windows only. MetaTrader 5's MQL5 runtime and MetaEditor are
 Windows-native, so this EA requires a Windows installation of the
 terminal (a Windows VM/VPS works for Mac or Linux users).
